@@ -1,5 +1,11 @@
+# config for Olimex PoE Bluetooth proxy
+# board: https://www.olimex.com/Products/IoT/ESP32/ESP32-POE-ISO/open-source-hardware
+# project: https://esphome.github.io/bluetooth-proxies/
+<<: !include common/base.yaml
+
 esphome:
   name: olimex-bluetooth-proxy
+  name_add_mac_suffix: true
   project:
     name: esphome.bluetooth-proxy
     version: "1.0"
@@ -8,13 +14,6 @@ esp32:
   board: esp32-poe-iso
   framework:
     type: arduino
-
-logger:
-
-api:
-
-ota:
-  password: !secret ota_pwd
 
 ethernet:
   type: LAN8720

@@ -1,0 +1,41 @@
+# config for ESP32-CAM
+# https://www.amazon.de/gp/product/B08P1NMPLL
+<<: !include common/base_wifi.yaml
+
+esphome:
+  name: esp32-cam
+  name_add_mac_suffix: true
+  board: esp32dev
+  platform: ESP32
+
+esp32_camera:
+  name: esp32-cam
+  external_clock:
+    pin: GPIO0
+    frequency: 20MHz
+  i2c_pins:
+    sda: GPIO26
+    scl: GPIO27
+  data_pins: [GPIO5, GPIO18, GPIO19, GPIO21, GPIO36, GPIO39, GPIO34, GPIO35]
+  vsync_pin: GPIO25
+  href_pin: GPIO23
+  pixel_clock_pin: GPIO22
+  power_down_pin: GPIO32
+  resolution: 800x600
+  idle_framerate: 0.1fps
+
+esp32_camera_web_server:
+  - port: 8080
+    mode: stream
+  - port: 8081
+    mode: snapshot
+
+output:
+  - platform: ledc
+    pin: GPIO4
+    channel: 2 # channel 1 is used for esp32_camera
+    id: led
+light:
+  - platform: monochromatic
+    output: led
+    name: esp32-cam light 

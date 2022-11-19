@@ -1,0 +1,23 @@
+# config for Wemos D1 WROOM-02 8266 with MAX6675 temp sensor
+# ! OTA does not work on this board, flash is too small !
+# board: https://aliexpress.com/item/32881484448.html
+# sensor: https://aliexpress.com/item/32841448771.html
+# print: https://www.printables.com/model/170891-wemos-d1-18650-max6675-temp-sensor
+<<: !include common/base_wifi.yaml
+
+esphome:
+  name: wemos18650-max6675
+  name_add_mac_suffix: true
+
+esp8266:
+  board: d1_mini
+
+spi:
+  clk_pin: D5
+  miso_pin: D7
+
+sensor:
+  - platform: max6675
+    name: "Ooni Temperature"
+    cs_pin: D2
+    update_interval: 20s

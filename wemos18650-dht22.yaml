@@ -1,0 +1,22 @@
+# config for Wemos D1 WROOM-02 8266 with DHT22 temp & humidity sensor
+# ! OTA does not work on this board, flash is too small !
+# board: https://aliexpress.com/item/32881484448.html
+# sensor: https://aliexpress.com/item/32753887461.html
+<<: !include common/base_wifi.yaml
+
+esphome:
+  name: wemos18650-dht22
+  name_add_mac_suffix: true
+  platform: ESP8266
+  board: d1_mini
+
+captive_portal:
+
+sensor:
+  - platform: dht
+    pin: D1
+    temperature:
+      name: "wemos18650.temperature"
+    humidity:
+      name: "wemos18650.humidity"
+    update_interval: 60s

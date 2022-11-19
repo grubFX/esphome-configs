@@ -1,0 +1,3 @@
+<<: !include api.yaml
+<<: !include logger.yaml
+<<: !include ota.yaml
