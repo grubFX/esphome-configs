@@ -5,8 +5,9 @@
 esphome:
   name: esp32-cam
   name_add_mac_suffix: true
+  
+esp32:
   board: esp32dev
-  platform: ESP32
 
 esp32_camera:
   name: esp32-cam
@@ -21,7 +22,7 @@ esp32_camera:
   href_pin: GPIO23
   pixel_clock_pin: GPIO22
   power_down_pin: GPIO32
-  resolution: 800x600
+  resolution: 1600x1200
   idle_framerate: 0.1fps
 
 esp32_camera_web_server:
@@ -33,9 +34,10 @@ esp32_camera_web_server:
 output:
   - platform: ledc
     pin: GPIO4
-    channel: 2 # channel 1 is used for esp32_camera
+    channel: 2 # channel 1 is used for esp_camera
     id: led
+
 light:
   - platform: monochromatic
     output: led
-    name: esp32-cam light 
+    name: esp32-cam light
