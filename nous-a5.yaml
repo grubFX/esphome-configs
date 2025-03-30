@@ -1,0 +1,66 @@
+# Config for the NOUS A5 power strip. I managed to do it on the A5
+# (not the A5T) model by opening it and manually flashing the chip
+# initially. As soon as you got ESPhome on there use OTA updates.
+# https://nous.technology/product/nous-a5-smart-power-strip.html
+# NOTE: power meter not (yet) configured, only the relays.
+<<: !include common/base_wifi.yaml
+esphome:
+  name: nous-a5
+
+esp8266:
+  board: esp01_1m
+
+debug:
+  update_interval: 5s
+
+text_sensor:
+  - platform: debug
+    device:
+      name: "Device Info"
+    reset_reason:
+      name: "Reset Reason"
+
+switch:
+  - platform: gpio
+    id: switch_1
+    name: Relay 1
+    pin:
+      number: GPIO14
+      inverted: false
+  - platform: gpio
+    id: switch_2
+    name: Relay 2
+    pin:
+      number: GPIO12
+      inverted: false
+  - platform: gpio
+    id: switch_3
+    name: Relay 3
+    pin:
+      number: GPIO13
+      inverted: false
+  - platform: gpio
+    id: switch_4
+    name: USB ports
+    pin:
+      number: GPIO5
+      inverted: true
+
+binary_sensor:
+  - platform: gpio
+    id: binary_switch_all
+    pin:
+      number: GPIO16
+      inverted: true
+      mode: input
+    on_press:
+      then:
+        - switch.toggle: switch_1
+        - switch.toggle: switch_2
+        - switch.toggle: switch_3
+        - switch.toggle: switch_4
+
+status_led:
+  pin:
+    number: GPIO2
+    inverted: true

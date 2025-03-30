@@ -1,3 +1,7 @@
+# Gitignore settings for ESPHome
+/.esphome
+/archive
+/secrets.yaml
 secrets.yaml
 .vscode/
 .pio/
