@@ -10,8 +10,6 @@ esphome:
   platform: ESP8266
   board: d1_mini
 
-captive_portal:
-
 sensor:
   - platform: dht
     pin: D1

@@ -1,0 +1,35 @@
+# config for ESP32 with TM1637 4-digit display as a clock
+# ESP32-WROOM-32: amazon.de/-/en/dp/B0D86QJ1YB
+# TM1637: amazon.de/-/en/dp/B0D9Q563BD
+<<: !include common/base_wifi.yaml
+
+esphome:
+  name: esp32-tm1637-clock
+
+esp32:
+  board: esp32dev
+
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+
+# TM1637 display configuration
+display:
+  - platform: tm1637
+    id: tm1637_display
+    clk_pin: GPIO16
+    dio_pin: GPIO17
+    update_interval: 1s
+    lambda: |-
+      static int i = 0;
+      i++;
+      if ((i % 2) == 0)
+        it.strftime("%H.%M", id(homeassistant_time).now());
+      else
+        it.strftime("%H%M", id(homeassistant_time).now());
+
+# sending wifi strength
+sensor:
+  - platform: wifi_signal
+    name: "WiFi Signal"
+    update_interval: 60s
