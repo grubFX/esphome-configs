@@ -1,0 +1,64 @@
+<<: !include common/base_wifi.yaml
+
+esphome:
+  name: "esp32-victron-ble"
+
+external_components:
+  - source: github://Fabian-Schmidt/esphome-victron_ble
+
+esp32:
+  board: esp32dev
+  framework: 
+    type: esp-idf
+
+logger:
+  level: DEBUG
+
+esp32_ble_tracker:
+
+victron_ble:
+  - id: MySmartSolar
+    mac_address: !secret smartsolar_mac
+    bindkey: !secret smartsolar_encryption_key
+
+sensor:
+  - platform: victron_ble
+    victron_ble_id: MySmartSolar
+    name: "MPPT Output Voltage"
+    type: BATTERY_VOLTAGE
+  - platform: victron_ble
+    victron_ble_id: MySmartSolar
+    name: "MPPT Output Current"
+    type: BATTERY_CURRENT
+  - platform: victron_ble
+    victron_ble_id: MySmartSolar
+    name: "MPPT Yield Today"
+    type: YIELD_TODAY
+  - platform: victron_ble
+    victron_ble_id: MySmartSolar
+    name: "MPPT PV Power"
+    type: PV_POWER
+  - platform: victron_ble
+    victron_ble_id: MySmartSolar
+    name: "MPPT Load Current"
+    type: LOAD_CURRENT
+
+binary_sensor:
+  - platform: victron_ble
+    victron_ble_id: MySmartSolar
+    name: "MPPT is in Fault state"
+    type: DEVICE_STATE_FAULT
+  - platform: victron_ble
+    victron_ble_id: MySmartSolar
+    name: "MPPT has Error"
+    type: CHARGER_ERROR
+
+text_sensor:
+  - platform: victron_ble
+    victron_ble_id: MySmartSolar
+    name: "MPPT state"
+    type: DEVICE_STATE
+  - platform: victron_ble
+    victron_ble_id: MySmartSolar
+    name: "MPPT Error reason"
+    type: CHARGER_ERROR

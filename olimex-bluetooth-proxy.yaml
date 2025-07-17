@@ -5,7 +5,7 @@
 
 esphome:
   name: olimex-bluetooth-proxy
-  name_add_mac_suffix: true
+  name_add_mac_suffix: false
   project:
     name: esphome.bluetooth-proxy
     version: "1.0"
@@ -13,7 +13,7 @@ esphome:
 esp32:
   board: esp32-poe-iso
   framework:
-    type: arduino
+    type: esp-idf
 
 ethernet:
   type: LAN8720

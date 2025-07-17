@@ -8,6 +8,8 @@ esphome:
   
 esp32:
   board: esp32dev
+  framework:
+    type: esp-idf
 
 esp32_camera:
   name: esp32-cam

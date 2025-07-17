@@ -8,6 +8,8 @@ esphome:
 
 esp32:
   board: esp32dev
+  framework:
+    type: esp-idf
 
 time:
   - platform: homeassistant
@@ -19,6 +21,7 @@ display:
     id: tm1637_display
     clk_pin: GPIO16
     dio_pin: GPIO17
+    intensity: 3
     update_interval: 1s
     lambda: |-
       static int i = 0;
